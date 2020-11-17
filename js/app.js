@@ -1,4 +1,5 @@
 Image.all = [];
+let arr=[]
 function Image(imgObject) {
     this.image_url = imgObject.image_url;
     this.title = imgObject.title;
@@ -36,37 +37,53 @@ $.ajax('./page-1.json')
         // render Images
         Image.all.forEach(element => {
             console.log(232)
-            let imgSection = $('.photo-template').clone();
-            $('.main').append(imgSection);
-           
-            //add the values to elements inside created sections
-            imgSection.removeClass('photo-template');
-            imgSection.find('.imageTitle').text(element.title);
-            imgSection.find('.imageDescription').text(element.description);
-            imgSection.find('.image').attr('src', element.image_url);
-            imgSection.attr('class','deleteMe');// give the sections classes to remove them before rendering Images again.
 
+            // let template = $('#importElement').html();
+            // console.log(template);
+            // let html = Mustache.render(template,element);
+            // ;
+            // console.log(html)
+            // $('.main').append(template);
+
+            // return html;
+
+            let newObject = new Image(element);
+            // arr.push(newObject);
+            let renderObject = newObject.renderImg();       
+            $('.main').append(renderObject);
+            var imgSection = $('.section')
+            
+            imgSection.attr('class','deleteMe');// give the sections classes to remove them before rendering Images again.
+            console.log($('.name').html());
+            // let imgSection = $('.photo-template').clone();
+            // $('.main').append(imgSection);
+            
+            // //add the values to elements inside created sections
+            // imgSection.removeClass('photo-template');
+            // imgSection.find('.imageTitle').text(element.title);
+            // imgSection.find('.imageDescription').text(element.description);
+            // imgSection.find('.image').attr('src', element.image_url);
+            // imgSection.attr('class','deleteMe');// give the sections classes to remove them before rendering Images again.
+            
             
             
         });
+        
         
         //render images depend on the keyword
         $('.options-section').on('change',renderImgsKewordBased);
         function renderImgsKewordBased(event){
             $('.deleteMe').remove();
-            // $('.deleteMe').attr('style','display: none;');
+
+            $('.deleteMe').attr('style','display: none;');
             console.log(event.target.value)
             Image.all.forEach(element => {
                 if(element.keyword==event.target.value){
-                    
-                     let imgSection = $('.photo-template').clone();
-                     $('.main').append(imgSection);
-                    // console.log(imgSection.text)
-                     imgSection.removeClass('photo-template');
-                     imgSection.find('.imageTitle').text(element.title);
-                     imgSection.find('.imageDescription').text(element.description);
-                     imgSection.find('.image').attr('src', element.image_url);
-                     imgSection.attr('class','deleteMe');
+                   
+            let newObject = new Image(element);
+            // arr.push(newObject);
+            let renderObject = newObject.renderImg();
+            $('.main').append(renderObject);
                     
                 }
                 else if("default"==event.target.value){
@@ -74,11 +91,11 @@ $.ajax('./page-1.json')
             $('.main').append(imgSection);
            
             //add the values to elements inside created sections
-            imgSection.removeClass('photo-template');
-            imgSection.find('.imageTitle').text(element.title);
-            imgSection.find('.imageDescription').text(element.description);
-            imgSection.find('.image').attr('src', element.image_url);
-            imgSection.attr('class','deleteMe');// give the sections classes to remove them before rendering Images again.
+            // imgSection.removeClass('photo-template');
+            // imgSection.find('.imageTitle').text(element.title);
+            // imgSection.find('.imageDescription').text(element.description);
+            // imgSection.find('.image').attr('src', element.image_url);
+            // imgSection.attr('class','deleteMe');// give the sections classes to remove them before rendering Images again.
 
                 }
 
@@ -87,3 +104,17 @@ $.ajax('./page-1.json')
         }
     });
 
+/// lab 2
+Image.prototype.renderImg=function(){
+    let template = $('#importElement').html();
+// console.log(template);
+// console.log(template.find('.name'))
+let html = Mustache.render(template,this);
+// console.log(html)
+
+// $('.main').append(template);
+
+return html;
+
+    
+}
