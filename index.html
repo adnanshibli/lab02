@@ -6,6 +6,13 @@
     <title>The Gallery of Horns</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <script id="importElement" type="text/x-tmpl-mustache">
+      <section class="deleteMe">
+      <h2 class='{{title}}'>{{title}}</h2>
+      <img src="{{image_url}}" alt="{{title}}">
+      <p>{{description}}</p>
+      </section>
+    </script>
   </head>
   <body>
     <header>
@@ -15,17 +22,18 @@
       </select>
     </header>
     <main class="main">
-      <div class="container"><section class="photo-template">
+      <!-- <div>
         <h2 class="imageTitle"></h2>
         <img class="image" src="" alt="">
         <p class="imageDescription"></p>
       </section>
-    </div>
+    </div> -->
     </main>
     <footer>
       &copy; 2018 Mokdad & Adnan
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
       ></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js"></script>
       <script src="js/app.js"></script>
     </footer>
   </body>
